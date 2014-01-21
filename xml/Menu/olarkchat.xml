@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/olarkchat</path>
+    <page_callback>CRM_Olarkchat_Page_OlarkCallback</page_callback>
+    <title>OlarkCallback</title>
+    <access_callback>1</access_callback>
+    <is_public>true</is_public>
+  </item>
+</menu>
