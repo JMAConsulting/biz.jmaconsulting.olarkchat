@@ -7,8 +7,14 @@ class CRM_Olarkchat_Page_OlarkCallback extends CRM_Core_Page {
 
     $json = stripslashes($_POST['data']);
     $chat = json_decode($json, true);
+    // Get the secret code from the callback
+    $checkCode = CRM_Utils_Request::retrieve('olarksecret', 'String', CRM_Core_DAO::$_nullArray, FALSE, NULL, 'GET');
+    CRM_Core_Error::debug( '$checkCode', $checkCode );
+    // Get the secret code which is set in the database
+    $secretCode = CRM_Core_OptionGroup::values('olark_secret', TRUE);
+    CRM_Core_Error::debug( '$secretCode', $secretCode );
 
-    if ($chat) {
+    if ($chat && ($checkCode == $secretCode['Secret Code'])) { // check if codes match
       // log messages
       foreach ($chat['items'] as $key => $elements) {
         $messages[] = $elements['nickname'].': '.$elements['body'];
@@ -59,7 +65,6 @@ class CRM_Olarkchat_Page_OlarkCallback extends CRM_Core_Page {
       );
       $activity = civicrm_api( 'Activity', 'create', $activityParams);
     }
-
 
     parent::run();
   }
