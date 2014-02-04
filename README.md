@@ -12,17 +12,18 @@ Installation
 2. As part of your general CiviCRM installation, you should set an Extension Resource URL at Administer >> System Settings >> Resource URLs.
 3. Navigate to Administer >> System Settings >> Manage Extensions.
 4. Beside Olark Chat, click Install.
-5. Configure your Olark account to post the transcript of completed chats to CiviCRM by entering the following URLs depending on your CMS. (https://www.olark.com/crm/webhook)
+5. To get the secret key required for making secure postbacks to URLs, navigate to Administer >> System Settings >> Option Groups and look for the option group named "Olark Secret". Click on Options >> Edit to view / change the secret key.
+6. Configure your Olark account to post the transcript of completed chats to CiviCRM (https://www.olark.com/crm/webhook) by entering the following URLs depending on your CMS. You can also copy the URLs directly from your CMS into the Webhook integration page by navigating to Administer >> System Settings >> Option Groups, select Olark Secret, then click on Options >> Edit and copy the Olark Callback URL from the form.
    
    a. Drupal:
-       http://<YOUR_SITE_NAME>/civicrm/olarkchat?snippet=4
+       http://<YOUR_SITE_NAME>/civicrm/olarkchat?snippet=4&olarksecret=<OLARK_SECRET_KEY>
 
    b. WordPress:
-       http://<YOUR_SITE_NAME>/?page=CiviCRM&q=civicrm/olarkchat&snippet=4
+       http://<YOUR_SITE_NAME>/?page=CiviCRM&q=civicrm/olarkchat&snippet=4&olarksecret=<OLARK_SECRET_KEY>
 
    c. Joomla:
-       http://<YOUR_SITE_NAME>/index.php?option=com_civicrm&task=civicrm/olarkchat&snippet=4 
+       http://<YOUR_SITE_NAME>/index.php?option=com_civicrm&task=civicrm/olarkchat&snippet=4&olarksecret=<OLARK_SECRET_KEY>
 
-6. Refer to the handbook for details on how to successfully terminate a conversation so that a callback is sent to CiviCRM.
+7. Refer to the handbook for details on how to successfully terminate a conversation so that a callback is sent to CiviCRM.
 
 
