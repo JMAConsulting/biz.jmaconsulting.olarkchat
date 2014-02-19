@@ -9,6 +9,7 @@ class CRM_Olarkchat_Page_OlarkCallback extends CRM_Core_Page {
       $json = stripslashes($_POST['data']);
       $chat = json_decode($json, true);
     }
+    
     // Get the secret code from the callback
     $checkCode = CRM_Utils_Request::retrieve('olarksecret', 'String', CRM_Core_DAO::$_nullArray, FALSE, NULL, 'GET');
     // Get the secret code which is set in the database
@@ -32,6 +33,7 @@ class CRM_Olarkchat_Page_OlarkCallback extends CRM_Core_Page {
       // visitor
       $visitor['display_name'] = $chat['visitor']['fullName'];
       $visitor['email'] = $chat['visitor']['emailAddress'];
+      $visitor['contact_type'] = 'Individual';
       $visitor['version'] = 3;
       $dedupeParams = CRM_Dedupe_Finder::formatParams($visitor, 'Individual');
       $dupes = CRM_Dedupe_Finder::dupesByParams($dedupeParams, 'Individual');
@@ -65,7 +67,6 @@ class CRM_Olarkchat_Page_OlarkCallback extends CRM_Core_Page {
       );
       $activity = civicrm_api( 'Activity', 'create', $activityParams);
     }
-
     parent::run();
   }
 }
