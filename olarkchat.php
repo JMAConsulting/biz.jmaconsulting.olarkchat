@@ -7,6 +7,9 @@ require_once 'olarkchat.civix.php';
  */
 function olarkchat_civicrm_config(&$config) {
   _olarkchat_civix_civicrm_config($config);
+  if ($config->userFramework == 'Joomla' && 'civicrm/olarkchat' == $_GET['task']) {
+    $_SESSION['olark_temp'] = 1; 
+  }
 }
 
 /**
