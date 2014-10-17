@@ -83,15 +83,24 @@ function olarkchat_civicrm_managed(&$entities) {
  * Implementation of hook_civicrm_buildForm
  */
 function olarkchat_civicrm_buildForm($formName, &$form) {
-  $values = $form->getVar('_values');
-  if ($formName == 'CRM_Admin_Form_OptionValue' && $values['name'] == 'Secret Code') {
+  if ($formName == 'CRM_Admin_Form_Options') {
+    $values = $form->getVar('_values');
+    if (CRM_Utils_Array::value('name', $values) != 'Secret Code') {
+      return FALSE; 
+    }
+    $form->add('text',
+      'value',
+      ts('Value'),
+      CRM_Core_DAO::getAttribute('CRM_Core_DAO_OptionValue', 'value'),
+      TRUE
+    );
     $url = CRM_Utils_System::url('civicrm/olarkchat', 'snippet=4&olarksecret=', TRUE, NULL, NULL, TRUE);
     CRM_Core_Region::instance('page-body')->add(array(
       'markup' => '<table><tr id="olarkUrl"><td class="label"><label for="url">Olark Callback URL </label></td>
       <td style="padding-top:5px;"><b>'.$url.'<span id="secretcode"></span></b></td></tr></table>',
     ));
     CRM_Core_Region::instance('page-body')->add(array(
-      'script' => "cj('tr.crm-admin-optionvalue-form-block-name').after(cj('#olarkUrl'));
+      'script' => "cj('tr.crm-admin-options-form-block-value').after(cj('#olarkUrl'));
                            var url = '".$values['value']."';
                            cj('#secretcode').html(cj('#value').val());
                            cj('#value').keyup( function() {
