@@ -36,6 +36,7 @@ class CRM_Olarkchat_Page_OlarkCallback extends CRM_Core_Page {
       $visitor['contact_type'] = 'Individual';
       $visitor['version'] = 3;
       $dedupeParams = CRM_Dedupe_Finder::formatParams($visitor, 'Individual');
+      $dedupeParams['check_permission'] = FALSE;
       $dupes = CRM_Dedupe_Finder::dupesByParams($dedupeParams, 'Individual');
       if (count($dupes) == 1) {
         $visitor['contact_id'] = $dupes[0];
