@@ -83,7 +83,7 @@ function olarkchat_civicrm_managed(&$entities) {
  * Implementation of hook_civicrm_buildForm
  */
 function olarkchat_civicrm_buildForm($formName, &$form) {
-  if ($formName == 'CRM_Admin_Form_Options') {
+  if ($formName == 'CRM_Admin_Form_Options' && 'olark_secret' == $form->getVar('_gName')) {
     $values = $form->getVar('_values');
     if (CRM_Utils_Array::value('name', $values) != 'Secret Code') {
       return FALSE; 
