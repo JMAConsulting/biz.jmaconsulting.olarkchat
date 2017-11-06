@@ -36,11 +36,11 @@ class CRM_Olarkchat_Upgrader_Base {
    * Obtain a refernece to the active upgrade handler
    */
   static public function instance() {
-    if (! self::$instance) {
+    if (!self::$instance) {
       // FIXME auto-generate
       self::$instance = new CRM_Olarkchat_Upgrader(
         'biz.jmaconsulting.olarkchat',
-        realpath(__DIR__ .'/../../../')
+        realpath(__DIR__ . '/../../../')
       );
     }
     return self::$instance;
@@ -202,7 +202,7 @@ class CRM_Olarkchat_Upgrader_Base {
    * @return array(revisionNumbers) sorted numerically
    */
   public function getRevisions() {
-    if (! is_array($this->revisions)) {
+    if (!is_array($this->revisions)) {
       $this->revisions = array();
 
       $clazz = new ReflectionClass(get_class($this));
@@ -234,8 +234,6 @@ class CRM_Olarkchat_Upgrader_Base {
     CRM_Core_BAO_Setting::setItem($revision, 'Extension', $key);
     return TRUE;
   }
-
-  // ******** Hook delegates ********
 
   public function onInstall() {
     foreach (glob($this->extensionDir . '/sql/*_install.sql') as $file) {
@@ -278,12 +276,15 @@ class CRM_Olarkchat_Upgrader_Base {
   }
 
   public function onUpgrade($op, CRM_Queue_Queue $queue = NULL) {
-    switch($op) {
+    switch ($op) {
       case 'check':
         return array($this->hasPendingRevisions());
+
       case 'enqueue':
         return $this->enqueuePendingRevisions($queue);
+
       default:
     }
   }
+
 }
