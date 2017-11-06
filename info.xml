@@ -3,7 +3,7 @@
   <downloadUrl>https://github.com/JMAConsulting/biz.jmaconsulting.olarkchat/archive/1.3.zip</downloadUrl>
   <file>olarkchat</file>
   <name>Olark Chat Integration</name>
-  <description>Olark is a chat service that enables web site visitors to chat with staff of an organization. It has a good set of features for services in this space (http://www.olark.com/features). This extension integrates the service with CiviCRM by posting chat transcripts as CiviCRM activities attached to the visitor's existing or newly created contact record and assigned to the relevant staff person's record.</description>
+  <description>Olark is a chat service that enables web site visitors to chat with staff of an organization. It has a good set of features for services in this space (http://www.olark.com/features). This extension integrates the service with CiviCRM by posting chat transcripts as CiviCRM activities attached to the visitor's existing or newly created contact record and assigned to the relevant staff person's record. After installation, this extension will create an activity type “Chat Activity” and an option group “Olark Secret” with option value “Secret Code".</description>
   <urls>
     <url desc="Support">https://github.com/JMAConsulting/biz.jmaconsulting.olarkchat/issues?state=open</url>
     <url desc="Documentation">https://github.com/JMAConsulting/biz.jmaconsulting.olarkchat/blob/1.0/README.md</url>
